@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #8b4513;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .tabla-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tabla {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        
+        .tabla:active {
+            transform: scale(0.95);
+        }
+        
+        .dayan {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle at center, #d7a56e 0%, #9e6b35 100%);
+            border-radius: 50%;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .dayan::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .bayan {
+            width: 200px;
+            height: 170px;
+            background: radial-gradient(circle at center, #d7a56e 0%, #9e6b35 100%);
+            border-radius: 50%;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .bayan::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .label {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            color: #8b4513;
+            font-weight: bold;
+        }
+        
+        .keyboard-guide {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .keys-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .key {
+            background-color: #f0e6d2;
+            border: 2px solid #d7a56e;
+            padding: 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .key:hover {
+            background-color: #e6d2b3;
+        }
+        
+        .key:active {
+            transform: scale(0.95);
+            background-color: #d7a56e;
+        }
+        
+        .key-letter {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .key-sound {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .tabla-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .keys-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Tabla Player</h1>
+            <p>Click on the tablas or use your keyboard to play different tabla sounds</p>
+        </header>
+        
+        <div class="tabla-container">
+            <div class="tabla dayan" data-sound="dayan-na">
+                <div class="label">Dayan (Right)</div>
+            </div>
+            <div class="tabla bayan" data-sound="bayan-ge">
+                <div class="label">Bayan (Left)</div>
+            </div>
+        </div>
+        
+        <div class="keyboard-guide">
+            <h2>Keyboard Controls</h2>
+            <div class="keys-container">
+                <div class="key" data-key="q" data-sound="dayan-na">
+                    <div class="key-letter">Q</div>
+                    <div class="key-sound">Na</div>
+                </div>
+                <div class="key" data-key="w" data-sound="dayan-tin">
+                    <div class="key-letter">W</div>
+                    <div class="key-sound">Tin</div>
+                </div>
+                <div class="key" data-key="e" data-sound="dayan-te">
+                    <div class="key-letter">E</div>
+                    <div class="key-sound">Te</div>
+                </div>
+                <div class="key" data-key="r" data-sound="dayan-tun">
+                    <div class="key-letter">R</div>
+                    <div class="key-sound">Tun</div>
+                </div>
+                <div class="key" data-key="a" data-sound="bayan-ge">
+                    <div class="key-letter">A</div>
+                    <div class="key-sound">Ge</div>
+                </div>
+                <div class="key" data-key="s" data-sound="bayan-ka">
+                    <div class="key-letter">S</div>
+                    <div class="key-sound">Ka</div>
+                </div>
+                <div class="key" data-key="d" data-sound="bayan-dha">
+                    <div class="key-letter">D</div>
+                    <div class="key-sound">Dha</div>
+                </div>
+                <div class="key" data-key="f" data-sound="bayan-dhin">
+                    <div class="key-letter">F</div>
+                    <div class="key-sound">Dhin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Define tabla sounds
+            const sounds = {
+                'dayan-na': [220, 'sine', 0.1],
+                'dayan-tin': [330, 'sine', 0.1],
+                'dayan-te': [440, 'sine', 0.1],
+                'dayan-tun': [550, 'sine', 0.1],
+                'bayan-ge': [110, 'triangle', 0.2],
+                'bayan-ka': [82.5, 'triangle', 0.2],
+                'bayan-dha': [55, 'triangle', 0.2],
+                'bayan-dhin': [45, 'triangle', 0.2]
+            };
+
+            // Create audio context
+            let audioContext;
+            
+            // Initialize audio context on first user interaction
+            const initAudio = () => {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    document.removeEventListener('click', initAudio);
+                    document.removeEventListener('keydown', initAudio);
+                }
+            };
+
+            document.addEventListener('click', initAudio);
+            document.addEventListener('keydown', initAudio);
+
+            // Function to play tabla sound
+            const playTablaSound = (soundName) => {
+                if (!audioContext) return;
+                
+                const [frequency, type, duration] = sounds[soundName];
+                
+                // Create oscillator and gain node
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                // Set oscillator type and frequency
+                oscillator.type = type;
+                oscillator.frequency.value = frequency;
+                
+                // Set gain envelope for percussive sound
+                gainNode.gain.setValueAtTime(0.7, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                // Connect nodes and start/stop
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + duration);
+                
+                // Add some noise for a more realistic tabla sound
+                const noiseBuffer = createNoiseBuffer();
+                const noiseSource = audioContext.createBufferSource();
+                const noiseGain = audioContext.createGain();
+                
+                noiseSource.buffer = noiseBuffer;
+                noiseGain.gain.setValueAtTime(0.2, audioContext.currentTime);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration * 0.5);
+                
+                noiseSource.connect(noiseGain);
+                noiseGain.connect(audioContext.destination);
+                noiseSource.start();
+                noiseSource.stop(audioContext.currentTime + duration * 0.5);
+            };
+            
+            // Create noise buffer for more realistic tabla sound
+            function createNoiseBuffer() {
+                const bufferSize = audioContext.sampleRate * 0.5; // 0.5 seconds of noise
+                const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+                const output = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                
+                return buffer;
+            }
+
+            // Handle tabla clicks
+            document.querySelectorAll('.tabla').forEach(tabla => {
+                tabla.addEventListener('click', () => {
+                    const soundName = tabla.getAttribute('data-sound');
+                    playTablaSound(soundName);
+                });
+            });
+
+            // Handle key clicks
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', () => {
+                    const soundName = key.getAttribute('data-sound');
+                    playTablaSound(soundName);
+                    key.classList.add('active');
+                    setTimeout(() => {
+                        key.classList.remove('active');
+                    }, 100);
+                });
+            });
+
+            // Handle keyboard events
+            document.addEventListener('keydown', (event) => {
+                if (event.repeat) return; // Prevent holding down key
+                
+                const key = document.querySelector(`.key[data-key="${event.key.toLowerCase()}"]`);
+                if (key) {
+                    const soundName = key.getAttribute('data-sound');
+                    playTablaSound(soundName);
+                    key.classList.add('active');
+                    setTimeout(() => {
+                        key.classList.remove('active');
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
